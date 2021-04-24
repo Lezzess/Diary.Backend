@@ -6,10 +6,5 @@ using System;
 
 namespace Application.Dtos
 {
-    public record DiaryEntryDto
-    {
-        public Guid Id { get; init; }
-        public string Title { get; init; }
-        public string Description { get; init; }
-    }
+    public record DiaryEntryDto(Guid Id, string Title, string Description);
 }

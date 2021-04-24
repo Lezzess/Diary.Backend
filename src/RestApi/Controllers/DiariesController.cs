@@ -33,7 +33,7 @@ namespace RestApi.Controllers
 
         #region Public Methods
 
-        [HttpGet]
+        [HttpGet("all")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public Task<List<DiaryEntryDto>> GetAll()
         {
