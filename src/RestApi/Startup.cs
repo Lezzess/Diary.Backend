@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Persistence.DependencyInjection;
 using RestApi.DependencyInjection;
+using RestApi.Extensions;
 
 namespace RestApi
 {
@@ -47,6 +48,8 @@ namespace RestApi
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseExceptionHandling();
 
             app.UseHttpsRedirection();
 
