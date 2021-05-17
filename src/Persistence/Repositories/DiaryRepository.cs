@@ -4,11 +4,11 @@
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Core.Entities;
+using Core.Models;
 using Core.Services;
-using Persistence.ApplicationContext;
+using Persistence.Context;
 
-namespace Persistence.Services
+namespace Persistence.Repositories
 {
     internal class DiaryRepository : IDiaryRepository
     {

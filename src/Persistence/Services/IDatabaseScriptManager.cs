@@ -2,14 +2,12 @@
 
 // PVS-Studio Static Code Analyzer for C, C++, C#, and Java: http://www.viva64.com
 
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using Core.Models;
 
-namespace Core.Services
+namespace Persistence.Services
 {
-    public interface IDiaryRepository
+    internal interface IDatabaseScriptManager
     {
-        Task<List<DiaryEntry>> GetAllAsync();
+        Task<string> GetCreateTablesScriptContentAsync();
     }
 }

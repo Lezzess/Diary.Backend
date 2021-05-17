@@ -2,14 +2,12 @@
 
 // PVS-Studio Static Code Analyzer for C, C++, C#, and Java: http://www.viva64.com
 
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using Core.Models;
 
 namespace Core.Services
 {
-    public interface IDiaryRepository
+    public interface IDatabaseInitializationService
     {
-        Task<List<DiaryEntry>> GetAllAsync();
+        Task InitializeDatabaseAsync();
     }
 }

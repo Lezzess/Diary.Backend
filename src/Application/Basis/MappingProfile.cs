@@ -4,7 +4,7 @@
 
 using Application.Dtos;
 using AutoMapper;
-using Core.Entities;
+using Core.Models;
 
 namespace Application.Basis
 {

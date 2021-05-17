@@ -4,9 +4,9 @@
 
 using System;
 using System.Collections.Generic;
-using Core.Entities;
+using Core.Models;
 
-namespace Persistence.ApplicationContext
+namespace Persistence.Context
 {
     internal static class ApplicationContextMock
     {

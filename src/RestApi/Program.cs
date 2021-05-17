@@ -2,17 +2,40 @@
 
 // PVS-Studio Static Code Analyzer for C, C++, C#, and Java: http://www.viva64.com
 
+using System.Threading.Tasks;
+using Core.Services;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using RestApi;
 
-CreateHostBuilder(args).Build().Run();
-
-static IHostBuilder CreateHostBuilder(string[] args)
+namespace RestApi
 {
-    return Host.CreateDefaultBuilder(args)
-               .ConfigureWebHostDefaults(webBuilder =>
-               {
-                   webBuilder.UseStartup<Startup>();
-               });
+    public class Program
+    {
+        public static async Task Main(string[] args)
+        {
+            var host = CreateHostBuilder(args).Build();
+
+            await InitializeApplication(host);
+            await host.RunAsync();
+        }
+
+        private static IHostBuilder CreateHostBuilder(string[] args)
+        {
+            return Host.CreateDefaultBuilder(args)
+                       .ConfigureWebHostDefaults(webBuilder =>
+                       {
+                           webBuilder.UseStartup<Startup>();
+                       });
+        }
+
+        private static async Task InitializeApplication(IHost host)
+        {
+            using var scope = host.Services.CreateScope();
+
+            var databaseInitializationService =
+                scope.ServiceProvider.GetRequiredService<IDatabaseInitializationService>();
+            await databaseInitializationService.InitializeDatabaseAsync();
+        }
+    }
 }

@@ -21,7 +21,6 @@ namespace RestApi.DependencyInjection
             services.AddCors(
                 options => options.AddDefaultPolicy(
                     builder => builder.WithOrigins(FrontendDevelopmentDomain)));
-
             services.AddControllers();
 
             return services;

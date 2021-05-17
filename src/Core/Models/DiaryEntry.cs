@@ -4,7 +4,7 @@
 
 using Core.Basis;
 
-namespace Core.Entities
+namespace Core.Models
 {
     public class DiaryEntry : AggregateRoot
     {

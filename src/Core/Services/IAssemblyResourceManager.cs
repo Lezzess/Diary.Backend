@@ -2,14 +2,13 @@
 
 // PVS-Studio Static Code Analyzer for C, C++, C#, and Java: http://www.viva64.com
 
-using System.Collections.Generic;
+using System.Reflection;
 using System.Threading.Tasks;
-using Core.Models;
 
 namespace Core.Services
 {
-    public interface IDiaryRepository
+    public interface IAssemblyResourceManager
     {
-        Task<List<DiaryEntry>> GetAllAsync();
+        Task<string> GetFileContentAsync(Assembly assembly, string filePath);
     }
 }
