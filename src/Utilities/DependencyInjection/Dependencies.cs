@@ -2,18 +2,19 @@
 
 // PVS-Studio Static Code Analyzer for C, C++, C#, and Java: http://www.viva64.com
 
-using Core.Services;
 using Microsoft.Extensions.DependencyInjection;
+using Utilities.Services;
 
-namespace Core.DependencyInjection
+namespace Utilities.DependencyInjection
 {
     public static class Dependencies
     {
         #region Public Methods
 
-        public static IServiceCollection AddCoreDependencies(this IServiceCollection services)
+        public static IServiceCollection AddUtilitiesDependencies(this IServiceCollection services)
         {
-            return services.AddTransient<IAssemblyResourceManager, AssemblyResourceManager>();
+            services.AddTransient<IAssemblyResourceManager, AssemblyResourceManager>();
+            return services;
         }
 
         #endregion

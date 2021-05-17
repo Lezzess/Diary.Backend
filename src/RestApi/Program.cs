@@ -12,6 +12,8 @@ namespace RestApi
 {
     public class Program
     {
+        #region Public Methods
+
         public static async Task Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
@@ -20,13 +22,15 @@ namespace RestApi
             await host.RunAsync();
         }
 
+        #endregion
+
+        #region Private Methods
+
         private static IHostBuilder CreateHostBuilder(string[] args)
         {
             return Host.CreateDefaultBuilder(args)
-                       .ConfigureWebHostDefaults(webBuilder =>
-                       {
-                           webBuilder.UseStartup<Startup>();
-                       });
+                       .ConfigureWebHostDefaults(
+                           webBuilder => webBuilder.UseStartup<Startup>());
         }
 
         private static async Task InitializeApplication(IHost host)
@@ -37,5 +41,7 @@ namespace RestApi
                 scope.ServiceProvider.GetRequiredService<IDatabaseInitializationService>();
             await databaseInitializationService.InitializeDatabaseAsync();
         }
+
+        #endregion
     }
 }

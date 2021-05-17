@@ -5,7 +5,7 @@
 using System;
 using System.Reflection;
 
-namespace Core.Exceptions
+namespace Utilities.Exceptions
 {
     public class ResourceNotFoundException : Exception
     {

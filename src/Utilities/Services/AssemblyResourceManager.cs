@@ -5,9 +5,9 @@
 using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
-using Core.Exceptions;
+using Utilities.Exceptions;
 
-namespace Core.Services
+namespace Utilities.Services
 {
     internal class AssemblyResourceManager : IAssemblyResourceManager
     {
