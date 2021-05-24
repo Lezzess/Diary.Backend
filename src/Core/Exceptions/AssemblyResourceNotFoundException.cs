@@ -5,11 +5,11 @@
 using System;
 using System.Reflection;
 
-namespace Utilities.Exceptions
+namespace Core.Exceptions
 {
-    public class ResourceNotFoundException : Exception
+    public class AssemblyResourceNotFoundException : Exception
     {
-        public ResourceNotFoundException(Assembly assembly, string filePath)
+        public AssemblyResourceNotFoundException(Assembly assembly, string filePath)
             : base($"Requested resource {filePath} was not found in the assembly {assembly}")
         {
 

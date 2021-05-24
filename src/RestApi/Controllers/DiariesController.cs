@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Application.Dtos;
 using Application.Requests.Diaries.GetAll;
+using Application.Requests.Tests.Get;
+using Core.Models;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -38,6 +40,19 @@ namespace RestApi.Controllers
         public Task<List<DiaryEntryDto>> GetAll()
         {
             return _mediator.Send(new GetAllDiariesRequest());
+        }
+
+        [HttpGet("test")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public Task<TestEntry> GetTest(string propertyOne, int? propertyTwo, string propertyThree)
+        {
+            return _mediator.Send(
+                new GetTestEntryRequest()
+                {
+                    PropertyOne = propertyOne,
+                    PropertyTwo = propertyTwo,
+                    PropertyThree = propertyThree
+                });
         }
 
         #endregion

@@ -48,8 +48,9 @@ namespace RestApi.Middlewares
         {
             var statusCode = exception switch
             {
-                EntityNotFoundException => 404,
-                _ => 500
+                ValidationException => StatusCodes.Status400BadRequest,
+                EntityNotFoundException => StatusCodes.Status404NotFound,
+                _ => StatusCodes.Status500InternalServerError
             };
 
             context.Response.StatusCode = statusCode;

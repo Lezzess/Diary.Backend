@@ -18,7 +18,7 @@ namespace RestApi
         {
             var host = CreateHostBuilder(args).Build();
 
-            await InitializeApplication(host);
+            await InitializeApplicationAsync(host);
             await host.RunAsync();
         }
 
@@ -33,7 +33,7 @@ namespace RestApi
                            webBuilder => webBuilder.UseStartup<Startup>());
         }
 
-        private static async Task InitializeApplication(IHost host)
+        private static async Task InitializeApplicationAsync(IHost host)
         {
             using var scope = host.Services.CreateScope();
 

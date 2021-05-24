@@ -3,6 +3,7 @@
 // PVS-Studio Static Code Analyzer for C, C++, C#, and Java: http://www.viva64.com
 
 using Application.DependencyInjection;
+using CoreServices.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -11,7 +12,6 @@ using Microsoft.Extensions.Hosting;
 using Persistence.DependencyInjection;
 using RestApi.DependencyInjection;
 using RestApi.Extensions;
-using Utilities.DependencyInjection;
 
 namespace RestApi
 {
@@ -37,10 +37,10 @@ namespace RestApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCoreServicesDependencies();
             services.AddApplicationDependencies();
             services.AddPersistenceDependencies(Configuration);
             services.AddRestApiDependencies();
-            services.AddUtilitiesDependencies();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

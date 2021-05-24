@@ -5,7 +5,7 @@
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace Utilities.Services
+namespace Core.Services
 {
     public interface IAssemblyResourceManager
     {

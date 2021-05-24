@@ -22,7 +22,7 @@ namespace Persistence.Services
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         public DatabaseInitializationService(
             ApplicationContext applicationContext, 

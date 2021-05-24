@@ -2,6 +2,7 @@
 
 // PVS-Studio Static Code Analyzer for C, C++, C#, and Java: http://www.viva64.com
 
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace RestApi.DependencyInjection
@@ -21,6 +22,10 @@ namespace RestApi.DependencyInjection
             services.AddCors(
                 options => options.AddDefaultPolicy(
                     builder => builder.WithOrigins(FrontendDevelopmentDomain)));
+            
+            services.Configure<ApiBehaviorOptions>(
+                options => options.SuppressModelStateInvalidFilter = true);
+
             services.AddControllers();
 
             return services;

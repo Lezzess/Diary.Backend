@@ -5,9 +5,10 @@
 using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
-using Utilities.Exceptions;
+using Core.Exceptions;
+using Core.Services;
 
-namespace Utilities.Services
+namespace CoreServices.Services.Utilities
 {
     internal class AssemblyResourceManager : IAssemblyResourceManager
     {
@@ -19,7 +20,7 @@ namespace Utilities.Services
 
             await using var stream = assembly.GetManifestResourceStream(resourcePath);
             if (stream == null)
-                throw new ResourceNotFoundException(assembly, filePath);
+                throw new AssemblyResourceNotFoundException(assembly, filePath);
 
             using var streamReader = new StreamReader(stream);
             return await streamReader.ReadToEndAsync();

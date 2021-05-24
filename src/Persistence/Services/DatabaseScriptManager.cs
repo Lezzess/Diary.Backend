@@ -5,7 +5,7 @@
 using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
-using Utilities.Services;
+using Core.Services;
 
 namespace Persistence.Services
 {
@@ -24,7 +24,7 @@ namespace Persistence.Services
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         public DatabaseScriptManager(IAssemblyResourceManager assemblyResourceManager)
         {
