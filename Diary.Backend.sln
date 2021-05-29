@@ -20,7 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6AE4DC7C-D00
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{EED76C33-B503-492C-BAC7-C057A2704A3D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreServices", "src\CoreServices\CoreServices.csproj", "{B309F43D-4408-4EB0-B94D-4ED9376B236F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utilities", "src\Utilities\Utilities.csproj", "{B309F43D-4408-4EB0-B94D-4ED9376B236F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
