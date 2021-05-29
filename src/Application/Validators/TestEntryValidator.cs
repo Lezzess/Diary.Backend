@@ -1,7 +1,8 @@
 ﻿using Core.Models;
 using CoreServices.Services.Validation.Configuration;
+using CoreServices.Services.Validation.Validators;
 
-namespace CoreServices.Services.Validation.Validators
+namespace Application.Validators
 {
     internal class TestEntryValidator : Validator<TestEntry>
     {

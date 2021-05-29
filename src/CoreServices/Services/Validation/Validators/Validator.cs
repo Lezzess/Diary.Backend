@@ -10,7 +10,7 @@ using CoreServices.Services.Validation.RuleCollections;
 
 namespace CoreServices.Services.Validation.Validators
 {
-    internal abstract class Validator<TClass> : IValidator<TClass>
+    public abstract class Validator<TClass> : IValidator<TClass>
     {
         #region Dependencies
 

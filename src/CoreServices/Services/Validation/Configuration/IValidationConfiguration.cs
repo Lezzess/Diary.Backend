@@ -8,7 +8,7 @@ using CoreServices.Services.Validation.RuleCollections;
 
 namespace CoreServices.Services.Validation.Configuration
 {
-    internal interface IValidationConfiguration
+    public interface IValidationConfiguration
     {
         ValidationRuleList GetRuleList<TClass, TProperty>(
             Expression<Func<TClass, TProperty>> propertySelectionExpression);

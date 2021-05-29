@@ -23,21 +23,8 @@ namespace CoreServices.DependencyInjection
             return services;
         }
 
-        #endregion
-
-        #region Private Methods
-
-        private static IServiceCollection AddValidation(this IServiceCollection services)
+        public static IServiceCollection AddValidators(this IServiceCollection services, Assembly assembly)
         {
-            services.AddSingleton<IValidationConfiguration, ValidationConfiguration>();
-            services.AddValidators();
-
-            return services;
-        }
-
-        private static IServiceCollection AddValidators(this IServiceCollection services)
-        {
-            var assembly = Assembly.GetExecutingAssembly();
             var validatorGenericInterface = typeof(IValidator<>);
             var validators = assembly.DefinedTypes.Where(
                 type => !type.IsGenericType &&
@@ -52,6 +39,16 @@ namespace CoreServices.DependencyInjection
                 services.AddSingleton(validatorInterface, validatorType);
             }
 
+            return services;
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private static IServiceCollection AddValidation(this IServiceCollection services)
+        {
+            services.AddSingleton<IValidationConfiguration, ValidationConfiguration>();
             return services;
         }
 

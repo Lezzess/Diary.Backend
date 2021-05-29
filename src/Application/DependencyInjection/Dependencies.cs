@@ -3,6 +3,7 @@
 // PVS-Studio Static Code Analyzer for C, C++, C#, and Java: http://www.viva64.com
 
 using System.Reflection;
+using CoreServices.DependencyInjection;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,18 +15,10 @@ namespace Application.DependencyInjection
 
         public static IServiceCollection AddApplicationDependencies(this IServiceCollection services)
         {
-            return services.AddNugetDependencies();
-        }
-
-        #endregion
-
-        #region Private Methods
-
-        private static IServiceCollection AddNugetDependencies(this IServiceCollection services)
-        {
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
-
+            services.AddValidators(Assembly.GetExecutingAssembly());
+            
             return services;
         }
 

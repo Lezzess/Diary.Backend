@@ -9,12 +9,12 @@ using Core.Exceptions;
 
 namespace CoreServices.Services.Validation.RuleCollections
 {
-    internal abstract class ValidationRuleList
+    public abstract class ValidationRuleList
     {
 
     }
 
-    internal abstract class ValidationRuleCollection<TValue> : ValidationRuleList
+    public abstract class ValidationRuleCollection<TValue> : ValidationRuleList
     {
         #region Fields
 

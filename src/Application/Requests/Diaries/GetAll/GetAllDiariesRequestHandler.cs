@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Application.Dtos;
 using AutoMapper;
-using Core.Services;
+using Core.Repositories;
 using MediatR;
 
 namespace Application.Requests.Diaries.GetAll

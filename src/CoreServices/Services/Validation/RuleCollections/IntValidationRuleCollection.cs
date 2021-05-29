@@ -4,7 +4,7 @@
 
 namespace CoreServices.Services.Validation.RuleCollections
 {
-    internal class IntValidationRuleCollection : ValidationRuleCollection<int?>
+    public class IntValidationRuleCollection : ValidationRuleCollection<int?>
     {
         #region Public Methods
 
