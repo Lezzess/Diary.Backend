@@ -5,7 +5,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Core.Models;
-using Core.Services;
+using Core.Repositories;
 using Persistence.Context;
 
 namespace Persistence.Repositories

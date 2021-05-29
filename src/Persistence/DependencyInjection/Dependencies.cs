@@ -2,6 +2,7 @@
 
 // PVS-Studio Static Code Analyzer for C, C++, C#, and Java: http://www.viva64.com
 
+using Core.Repositories;
 using Core.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -43,7 +44,8 @@ namespace Persistence.DependencyInjection
 
         private static IServiceCollection AddRepositories(this IServiceCollection services)
         {
-            services.AddTransient<IDiaryRepository, DiaryRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IDiaryRepository, DiaryRepository>();
 
             return services;
         }
