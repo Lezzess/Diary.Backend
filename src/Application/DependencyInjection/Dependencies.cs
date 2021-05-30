@@ -16,7 +16,9 @@ namespace Application.DependencyInjection
         public static IServiceCollection AddApplicationDependencies(this IServiceCollection services)
         {
             services.AddMediatR(Assembly.GetExecutingAssembly());
-            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            services.AddAutoMapper(
+                Assembly.GetExecutingAssembly(),
+                Assembly.GetAssembly(typeof(Persistence.DependencyInjection.Dependencies)));
             services.AddValidators(Assembly.GetExecutingAssembly());
             
             return services;

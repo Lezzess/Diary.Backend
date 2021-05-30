@@ -8,9 +8,9 @@ using Core.Models;
 
 namespace Application.Basis
 {
-    internal class MappingProfile : Profile
+    internal class DtoMappingProfile : Profile
     {
-        public MappingProfile()
+        public DtoMappingProfile()
         {
             CreateMap<DiaryEntry, DiaryEntryDto>();
         }
