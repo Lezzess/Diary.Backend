@@ -5,10 +5,10 @@
 using System;
 using System.Linq.Expressions;
 using Core.Services;
-using CoreServices.Services.Validation.Configuration;
-using CoreServices.Services.Validation.RuleCollections;
+using Utilities.Services.Validation.Configuration;
+using Utilities.Services.Validation.RuleCollections;
 
-namespace CoreServices.Services.Validation.Validators
+namespace Utilities.Services.Validation.Validators
 {
     public abstract class Validator<TClass> : IValidator<TClass>
     {

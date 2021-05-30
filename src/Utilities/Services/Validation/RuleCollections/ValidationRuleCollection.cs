@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Core.Exceptions;
 
-namespace CoreServices.Services.Validation.RuleCollections
+namespace Utilities.Services.Validation.RuleCollections
 {
     public abstract class ValidationRuleList
     {

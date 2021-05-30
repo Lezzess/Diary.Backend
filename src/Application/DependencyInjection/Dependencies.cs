@@ -3,9 +3,9 @@
 // PVS-Studio Static Code Analyzer for C, C++, C#, and Java: http://www.viva64.com
 
 using System.Reflection;
-using CoreServices.DependencyInjection;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using Utilities.DependencyInjection;
 
 namespace Application.DependencyInjection
 {

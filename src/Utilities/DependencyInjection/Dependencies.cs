@@ -5,11 +5,11 @@
 using System.Linq;
 using System.Reflection;
 using Core.Services;
-using CoreServices.Services.Resources;
-using CoreServices.Services.Validation.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Utilities.Services.Resources;
+using Utilities.Services.Validation.Configuration;
 
-namespace CoreServices.DependencyInjection
+namespace Utilities.DependencyInjection
 {
     public static class Dependencies
     {

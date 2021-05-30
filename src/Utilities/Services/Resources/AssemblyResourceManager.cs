@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Core.Exceptions;
 using Core.Services;
 
-namespace CoreServices.Services.Resources
+namespace Utilities.Services.Resources
 {
     internal class AssemblyResourceManager : IAssemblyResourceManager
     {

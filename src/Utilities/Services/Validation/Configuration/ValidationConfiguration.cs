@@ -6,9 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using Core.Exceptions;
-using CoreServices.Services.Validation.RuleCollections;
+using Utilities.Services.Validation.RuleCollections;
 
-namespace CoreServices.Services.Validation.Configuration
+namespace Utilities.Services.Validation.Configuration
 {
     internal class ValidationConfiguration : IValidationConfiguration
     {
