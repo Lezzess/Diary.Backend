@@ -14,15 +14,9 @@ namespace Utilities.Services.Validation.RuleCollections
             return this;
         }
 
-        public StringValidationRuleCollection IsNotNull()
+        public StringValidationRuleCollection IsNotNullOrEmpty()
         {
-            MatchesIf(value => value != null);
-            return this;
-        }
-
-        public StringValidationRuleCollection IsNotEmpty()
-        {
-            MatchesIf(value => value != string.Empty);
+            MatchesIf(value => !string.IsNullOrEmpty(value));
             return this;
         }
 

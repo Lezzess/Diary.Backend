@@ -13,8 +13,7 @@ namespace Application.Validators
         {
             Value(entry => entry.PropertyOne)
                 .Trim()
-                .IsNotNull()
-                .IsNotEmpty()
+                .IsNotNullOrEmpty()
                 .HasMinLength(3)
                 .HasMaxLength(5);
 
@@ -24,8 +23,7 @@ namespace Application.Validators
 
             Value(entry => entry.PropertyThree)
                 .Trim()
-                .IsNotNull()
-                .IsNotEmpty()
+                .IsNotNullOrEmpty()
                 .HasMinLength(1)
                 .HasMaxLength(2);
         }
