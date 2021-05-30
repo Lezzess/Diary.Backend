@@ -7,8 +7,8 @@ insert into [dbo].[database_information] ([database_version]) values (0);
 
 create table [dbo].[diary_entries] (
     [id] uniqueidentifier not null primary key clustered,
-    [title] nvarchar(100) not null,
-    [description] nvarchar(100) not null
+    [title] nvarchar(300) not null,
+    [description] nvarchar(max) not null
 );
 
 commit;
