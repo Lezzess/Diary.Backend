@@ -6,5 +6,5 @@ using System;
 
 namespace Application.Dtos
 {
-    public record DiaryEntryDto(Guid Id, string Title, string Description);
+    public record DiaryDto(Guid Id, string Title, string Description);
 }

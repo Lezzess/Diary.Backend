@@ -7,8 +7,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Persistence.Entities
 {
-    [Table("diary_entries")]
-    internal class DiaryEntryEntity
+    [Table("diaries")]
+    internal class DiaryEntity
     {
         [Column("id")]
         public Guid Id { get; set; }

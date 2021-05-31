@@ -5,12 +5,20 @@
 using System;
 using System.Threading.Tasks;
 using Core.Exceptions;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Hosting;
 
 namespace RestApi.Middlewares
 {
     internal class ExceptionHandlingMiddleware
     {
+        #region Dependencies
+
+        private readonly IWebHostEnvironment _environment;
+
+        #endregion
+
         #region Fields
 
         private readonly RequestDelegate _next;
@@ -19,9 +27,10 @@ namespace RestApi.Middlewares
 
         #region Constructors
 
-        public ExceptionHandlingMiddleware(RequestDelegate next)
+        public ExceptionHandlingMiddleware(RequestDelegate next, IWebHostEnvironment environment)
         {
             _next = next;
+            _environment = environment;
         }
 
         #endregion
@@ -44,17 +53,28 @@ namespace RestApi.Middlewares
 
         #region Private Methods
 
-        private static async Task HandleExceptionAsync(Exception exception, HttpContext context)
+        private async Task HandleExceptionAsync(Exception exception, HttpContext context)
         {
             var statusCode = exception switch
             {
                 ValidationException => StatusCodes.Status400BadRequest,
-                EntityNotFoundException => StatusCodes.Status404NotFound,
+                ModelNotFoundException => StatusCodes.Status404NotFound,
                 _ => StatusCodes.Status500InternalServerError
             };
 
             context.Response.StatusCode = statusCode;
-            await context.Response.CompleteAsync();
+
+            if (_environment.IsDevelopment() && statusCode == StatusCodes.Status500InternalServerError)
+            {
+                var message = $"Exception type: {exception.GetType()}\n"
+                              + $"Exception message: {exception.Message}\n"
+                              + $"Exception stack trace: {exception.StackTrace}";
+                await context.Response.WriteAsync(message);
+            }
+            else
+            {
+                await context.Response.CompleteAsync();
+            }
         }
 
         #endregion

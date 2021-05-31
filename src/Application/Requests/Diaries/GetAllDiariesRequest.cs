@@ -10,9 +10,11 @@ using AutoMapper;
 using Core.Repositories;
 using MediatR;
 
-namespace Application.Requests.Diaries.GetAll
+namespace Application.Requests.Diaries
 {
-    internal class GetAllDiariesRequestHandler : IRequestHandler<GetAllDiariesRequest, List<DiaryEntryDto>>
+    public record GetAllDiariesRequest() : IRequest<List<DiaryDto>>;
+
+    internal class GetAllDiariesRequestHandler : IRequestHandler<GetAllDiariesRequest, List<DiaryDto>>
     {
         #region Dependencies
 
@@ -35,11 +37,11 @@ namespace Application.Requests.Diaries.GetAll
 
         #region Public Methods
 
-        public async Task<List<DiaryEntryDto>> Handle(
+        public async Task<List<DiaryDto>> Handle(
             GetAllDiariesRequest request, CancellationToken cancellationToken)
         {
             var diaries = await _diaryRepository.GetAllAsync();
-            return _mapper.Map<List<DiaryEntryDto>>(diaries);
+            return _mapper.Map<List<DiaryDto>>(diaries);
         }
 
         #endregion

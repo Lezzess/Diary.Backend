@@ -6,18 +6,18 @@ using Core.Basis;
 
 namespace Core.Models
 {
-    public class DiaryEntry : AggregateRoot
+    public class Diary : AggregateRoot
     {
         #region Properties
 
-        public string Title { get; }
-        public string Description { get; }
+        public string Title { get; set; }
+        public string Description { get; set; }
 
         #endregion
 
         #region Constructors
 
-        public DiaryEntry(string title, string description)
+        public Diary(string title, string description)
         {
             Title = title;
             Description = description;

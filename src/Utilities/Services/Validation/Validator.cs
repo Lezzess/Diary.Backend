@@ -8,7 +8,7 @@ using Core.Services;
 using Utilities.Services.Validation.Configuration;
 using Utilities.Services.Validation.RuleCollections;
 
-namespace Utilities.Services.Validation.Validators
+namespace Utilities.Services.Validation
 {
     public abstract class Validator<TClass> : IValidator<TClass>
     {
@@ -52,6 +52,14 @@ namespace Utilities.Services.Validation.Validators
         #endregion
 
         #region Protected Methods
+
+        protected GuidValidationRuleCollection Value(
+            Expression<Func<TClass, Guid>> propertySelectionExpression)
+        {
+            var ruleList = new GuidValidationRuleCollection();
+            _validationConfiguration.AddRuleList(propertySelectionExpression, ruleList);
+            return ruleList;
+        }
 
         protected StringValidationRuleCollection Value(
             Expression<Func<TClass, string>> propertySelectionExpression)

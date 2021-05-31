@@ -1,6 +1,6 @@
 ﻿using Core.Models;
+using Utilities.Services.Validation;
 using Utilities.Services.Validation.Configuration;
-using Utilities.Services.Validation.Validators;
 
 namespace Application.Validators
 {

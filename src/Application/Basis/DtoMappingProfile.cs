@@ -12,7 +12,7 @@ namespace Application.Basis
     {
         public DtoMappingProfile()
         {
-            CreateMap<DiaryEntry, DiaryEntryDto>();
+            CreateMap<Diary, DiaryDto>();
         }
     }
 }

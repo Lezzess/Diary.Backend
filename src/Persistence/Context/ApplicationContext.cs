@@ -6,7 +6,7 @@ namespace Persistence.Context
     internal class ApplicationContext : DbContext
     {
         public DbSet<DatabaseInformation> DatabaseInformation { get; set; }
-        public DbSet<DiaryEntryEntity> DiaryEntries { get; set; }
+        public DbSet<DiaryEntity> Diaries { get; set; }
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
             : base(options)
