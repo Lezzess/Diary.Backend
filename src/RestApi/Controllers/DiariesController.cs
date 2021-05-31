@@ -77,13 +77,6 @@ namespace RestApi.Controllers
             return Ok();
         }
 
-        [HttpPost("test")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public Task<string> GetTest(string first, string second)
-        {
-            return Task.FromResult(first + second);
-        }
-
         #endregion
     }
 }
