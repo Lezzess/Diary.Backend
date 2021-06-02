@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Core.Exceptions;
 using Core.Models;
 using Core.Repositories;
 using Core.Services;
@@ -38,12 +39,20 @@ namespace Application.Requests.Diaries
 
         public async Task<Unit> Handle(RemoveDiaryRequest request, CancellationToken cancellationToken)
         {
-            _validator.Validate(request.Id, d => d.Id);
+            try
+            {
+                _validator.Validate(request.Id, d => d.Id);
 
-            var diary = await _diaryRepository.GetAsync(request.Id!.Value);
-            await _diaryRepository.RemoveAsync(diary);
-            await _unitOfWork.SaveChangesAsync(cancellationToken);
+                var diary = await _diaryRepository.GetAsync(request.Id!.Value);
+                await _diaryRepository.RemoveAsync(diary);
+                await _unitOfWork.SaveChangesAsync(cancellationToken);
 
+            }
+            catch (ModelNotFoundException)
+            {
+                // Ignore
+            }
+            
             return Unit.Value;
         }
 

@@ -72,7 +72,7 @@ namespace RestApi.Controllers
 
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> RemoveDiary(Guid? id)
         {
             await _mediator.Send(new RemoveDiaryRequest(id));
