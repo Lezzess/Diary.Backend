@@ -35,6 +35,7 @@ namespace Application.Requests.Diaries
             IDiaryRepository diaryRepository, 
             IUnitOfWork unitOfWork)
         {
+            _mapper = mapper;
             _validator = validator;
             _diaryRepository = diaryRepository;
             _unitOfWork = unitOfWork;
