@@ -3,7 +3,6 @@
 // PVS-Studio Static Code Analyzer for C, C++, C#, and Java: http://www.viva64.com
 
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Application.Dtos;
 using Application.Requests.Diaries;
@@ -36,17 +35,19 @@ namespace RestApi.Controllers
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public Task<List<DiaryDto>> GetAllDiaries()
+        public async Task<IActionResult> GetAllDiaries()
         {
-            return _mediator.Send(new GetAllDiariesRequest());
+            var diaries = await _mediator.Send(new GetAllDiariesRequest());
+            return Ok(diaries);
         }
 
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public Task<DiaryDto> GetDiary(Guid? id)
+        public async Task<IActionResult> GetDiary(Guid? id)
         {
-            return _mediator.Send(new GetDiaryRequest(id));
+            var diary = await _mediator.Send(new GetDiaryRequest(id));
+            return Ok(diary);
         }
 
         [HttpPost]
@@ -64,8 +65,9 @@ namespace RestApi.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> UpdateDiary(Guid? id, DiaryDto diaryToUpdate)
         {
-            await _mediator.Send(new UpdateDiaryRequest(id, diaryToUpdate.Title, diaryToUpdate.Description));
-            return Ok();
+            var (_, title, description) = diaryToUpdate;
+            var updatedDiary = await _mediator.Send(new UpdateDiaryRequest(id, title, description));
+            return Ok(updatedDiary);
         }
 
         [HttpDelete("{id}")]

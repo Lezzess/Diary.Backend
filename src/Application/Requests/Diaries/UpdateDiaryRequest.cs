@@ -5,6 +5,8 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Application.Dtos;
+using AutoMapper;
 using Core.Models;
 using Core.Repositories;
 using Core.Services;
@@ -12,12 +14,13 @@ using MediatR;
 
 namespace Application.Requests.Diaries
 {
-    public record UpdateDiaryRequest(Guid? Id, string Title, string Description) : IRequest;
+    public record UpdateDiaryRequest(Guid? Id, string Title, string Description) : IRequest<DiaryDto>;
 
-    internal class UpdateDiaryRequestHandler : IRequestHandler<UpdateDiaryRequest>
+    internal class UpdateDiaryRequestHandler : IRequestHandler<UpdateDiaryRequest, DiaryDto>
     {
         #region Dependencies
 
+        private readonly IMapper _mapper;
         private readonly IValidator<Diary> _validator;
         private readonly IDiaryRepository _diaryRepository;
         private readonly IUnitOfWork _unitOfWork;
@@ -27,6 +30,7 @@ namespace Application.Requests.Diaries
         #region Constructors
 
         public UpdateDiaryRequestHandler(
+            IMapper mapper,
             IValidator<Diary> validator, 
             IDiaryRepository diaryRepository, 
             IUnitOfWork unitOfWork)
@@ -40,7 +44,7 @@ namespace Application.Requests.Diaries
 
         #region Public Methods
 
-        public async Task<Unit> Handle(UpdateDiaryRequest request, CancellationToken cancellationToken)
+        public async Task<DiaryDto> Handle(UpdateDiaryRequest request, CancellationToken cancellationToken)
         {
             var (id, title, description) = request;
 
@@ -55,7 +59,7 @@ namespace Application.Requests.Diaries
             await _diaryRepository.UpdateAsync(diary);
             await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-            return Unit.Value;
+            return _mapper.Map<DiaryDto>(diary);
         }
 
         #endregion
