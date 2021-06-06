@@ -54,7 +54,7 @@ namespace Utilities.Services.Validation.Configuration
             var memberExpression = (MemberExpression)propertySelectionExpression.Body;
             var propertyName = memberExpression.Member.Name;
 
-            return new(classType, propertyName);
+            return new RuleCollectionKey(classType, propertyName);
         }
 
         #endregion
