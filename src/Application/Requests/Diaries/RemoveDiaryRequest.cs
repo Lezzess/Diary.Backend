@@ -1,4 +1,8 @@
-﻿using System;
+﻿// This is an open source non-commercial project. Dear PVS-Studio, please check it.
+
+// PVS-Studio Static Code Analyzer for C, C++, C#, and Java: http://www.viva64.com
+
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Core.Exceptions;
@@ -39,19 +43,14 @@ namespace Application.Requests.Diaries
 
         public async Task<Unit> Handle(RemoveDiaryRequest request, CancellationToken cancellationToken)
         {
-            try
-            {
-                _validator.Validate(request.Id, d => d.Id);
+            _validator.Validate(request.Id, d => d.Id);
 
-                var diary = await _diaryRepository.GetAsync(request.Id!.Value);
-                await _diaryRepository.RemoveAsync(diary);
-                await _unitOfWork.SaveChangesAsync(cancellationToken);
+            var diary = await _diaryRepository.GetAsync(request.Id!.Value);
+            if (diary == null)
+                throw new ModelNotFoundException<Diary>();
 
-            }
-            catch (ModelNotFoundException)
-            {
-                // Ignore
-            }
+            await _diaryRepository.RemoveAsync(diary);
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
             
             return Unit.Value;
         }

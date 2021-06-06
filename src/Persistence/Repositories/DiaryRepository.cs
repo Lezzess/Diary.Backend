@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
-using Core.Exceptions;
 using Core.Models;
 using Core.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -47,9 +46,6 @@ namespace Persistence.Repositories
         public async Task<Diary> GetAsync(Guid id)
         {
             var diaryEntity = await _applicationContext.Diaries.FindAsync(id);
-            if (diaryEntity == null)
-                throw new ModelNotFoundException<Diary>();
-
             return _mapper.Map<Diary>(diaryEntity);
         }
 
@@ -63,9 +59,6 @@ namespace Persistence.Repositories
         public async Task UpdateAsync(Diary diary)
         {
             var diaryEntity = await _applicationContext.Diaries.FindAsync(diary.Id);
-            if (diaryEntity == null)
-                throw new ModelNotFoundException<Diary>();
-
             diaryEntity.Title = diary.Title;
             diaryEntity.Description = diary.Description;
         }
@@ -73,9 +66,6 @@ namespace Persistence.Repositories
         public async Task RemoveAsync(Diary diary)
         {
             var diaryEntity = await _applicationContext.Diaries.FindAsync(diary.Id);
-            if (diaryEntity == null)
-                throw new ModelNotFoundException<Diary>();
-
             _applicationContext.Diaries.Remove(diaryEntity);
         }
 

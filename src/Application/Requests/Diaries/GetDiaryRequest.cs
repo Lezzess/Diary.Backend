@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Application.Dtos;
 using AutoMapper;
+using Core.Exceptions;
 using Core.Models;
 using Core.Repositories;
 using Core.Services;
@@ -47,6 +48,9 @@ namespace Application.Requests.Diaries
             _validator.Validate(request.Id, d => d.Id);
 
             var diary = await _diaryRepository.GetAsync(request.Id!.Value);
+            if (diary == null)
+                throw new ModelNotFoundException<Diary>();
+
             return _mapper.Map<DiaryDto>(diary);
         }
 
