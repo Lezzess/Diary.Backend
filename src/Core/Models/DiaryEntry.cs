@@ -10,8 +10,8 @@ namespace Core.Models
     {
         #region Properties
 
-        public string Title { get; set; }
-        public string Description { get; set; }
+        public string Title { get; private set; }
+        public string Description { get; private set; }
 
         #endregion
 
@@ -20,6 +20,20 @@ namespace Core.Models
         public Diary(string title, string description)
         {
             Title = title;
+            Description = description;
+        }
+
+        #endregion
+
+        #region Public Methods
+
+        public void ChangeTitle(string title)
+        {
+            Title = title;
+        }
+
+        public void ChangeDescription(string description)
+        {
             Description = description;
         }
 

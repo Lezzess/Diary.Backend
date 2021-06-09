@@ -58,8 +58,8 @@ namespace Application.Requests.Diaries
             if (diary == null)
                 throw new ModelNotFoundException<Diary>();
 
-            diary.Title = title;
-            diary.Description = description;
+            diary.ChangeTitle(title);
+            diary.ChangeDescription(description);
 
             await _diaryRepository.UpdateAsync(diary);
             await _unitOfWork.SaveChangesAsync(cancellationToken);
