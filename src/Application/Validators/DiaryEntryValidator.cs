@@ -10,8 +10,6 @@ namespace Application.Validators
 {
     internal class DiaryValidator : Validator<Diary>
     {
-        #region Constructor
-
         public DiaryValidator(IValidationConfiguration validationConfiguration) 
             : base(validationConfiguration)
         {
@@ -27,7 +25,5 @@ namespace Application.Validators
                 .Trim()
                 .IsNotNullOrEmpty();
         }
-
-        #endregion
     }
 }

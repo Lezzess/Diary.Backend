@@ -11,8 +11,6 @@ namespace Application.DependencyInjection
 {
     public static class Dependencies
     {
-        #region Public Methods
-
         public static IServiceCollection AddApplicationDependencies(this IServiceCollection services)
         {
             services.AddMediatR(Assembly.GetExecutingAssembly());
@@ -23,7 +21,5 @@ namespace Application.DependencyInjection
             
             return services;
         }
-
-        #endregion
     }
 }

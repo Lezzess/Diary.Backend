@@ -8,14 +8,10 @@ namespace Utilities.Services.Validation.RuleCollections
 {
     public class GuidValidationRuleCollection : ValidationRuleCollection<Guid?>
     {
-        #region Public Methods
-
         public GuidValidationRuleCollection IsNotNullOrEmpty()
         {
             MatchesIf(value => value != null && value != Guid.Empty);
             return this;
         }
-
-        #endregion
     }
 }

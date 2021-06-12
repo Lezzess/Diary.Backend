@@ -27,7 +27,7 @@ namespace Application.Requests.Diaries
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         public GetDiaryRequestHandler(
             IMapper mapper,

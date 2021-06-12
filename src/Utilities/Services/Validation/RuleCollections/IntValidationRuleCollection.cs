@@ -6,8 +6,6 @@ namespace Utilities.Services.Validation.RuleCollections
 {
     public class IntValidationRuleCollection : ValidationRuleCollection<int?>
     {
-        #region Public Methods
-
         public IntValidationRuleCollection IsNotNull()
         {
             MatchesIf(value => value != null);
@@ -19,7 +17,5 @@ namespace Utilities.Services.Validation.RuleCollections
             MatchesIf(value => value >= minValue && value <= maxValue);
             return this;
         }
-
-        #endregion
     }
 }

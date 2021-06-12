@@ -6,8 +6,6 @@ namespace Utilities.Services.Validation.RuleCollections
 {
     public class StringValidationRuleCollection : ValidationRuleCollection<string>
     {
-        #region Public Methods
-
         public StringValidationRuleCollection Trim()
         {
             Setup(value => value.Trim());
@@ -31,7 +29,5 @@ namespace Utilities.Services.Validation.RuleCollections
             MatchesIf(value => value.Length <= length);
             return this;
         }
-
-        #endregion
     }
 }
