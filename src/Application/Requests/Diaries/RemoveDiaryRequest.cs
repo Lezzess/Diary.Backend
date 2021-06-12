@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Core.Exceptions;
 using Core.Models;
 using Core.Repositories;
+using Core.Services;
 using MediatR;
 
 namespace Application.Requests.Diaries
@@ -18,7 +19,7 @@ namespace Application.Requests.Diaries
     {
         #region Dependencies
 
-        //private readonly IValidator<Diary> _validator;
+        private readonly IValidator<Diary> _validator;
         private readonly IDiaryRepository _diaryRepository;
         private readonly IUnitOfWork _unitOfWork;
 
@@ -27,11 +28,11 @@ namespace Application.Requests.Diaries
         #region Constructors
 
         public RemoveDiaryRequestHandler(
-            //IValidator<Diary> validator, 
+            IValidator<Diary> validator, 
             IDiaryRepository diaryRepository, 
             IUnitOfWork unitOfWork)
         {
-            //_validator = validator;
+            _validator = validator;
             _diaryRepository = diaryRepository;
             _unitOfWork = unitOfWork;
         }
@@ -42,7 +43,7 @@ namespace Application.Requests.Diaries
 
         public async Task<Unit> Handle(RemoveDiaryRequest request, CancellationToken cancellationToken)
         {
-            //_validator.Validate(request.Id, d => d.Id);
+            _validator.Validate(request.Id, d => d.Id);
 
             var diary = await _diaryRepository.GetAsync(request.Id!.Value);
             if (diary == null)

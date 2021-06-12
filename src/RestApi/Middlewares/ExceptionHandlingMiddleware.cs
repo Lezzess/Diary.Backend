@@ -57,7 +57,7 @@ namespace RestApi.Middlewares
         {
             var statusCode = exception switch
             {
-                //ValidationOldException => StatusCodes.Status400BadRequest,
+                ValidationException => StatusCodes.Status400BadRequest,
                 ModelNotFoundException => StatusCodes.Status404NotFound,
                 _ => StatusCodes.Status500InternalServerError
             };
