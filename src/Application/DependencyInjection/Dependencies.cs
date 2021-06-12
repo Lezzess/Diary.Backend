@@ -5,7 +5,6 @@
 using System.Reflection;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using Utilities.DependencyInjection;
 
 namespace Application.DependencyInjection
 {
@@ -17,7 +16,6 @@ namespace Application.DependencyInjection
             services.AddAutoMapper(
                 Assembly.GetExecutingAssembly(),
                 Assembly.GetAssembly(typeof(Persistence.DependencyInjection.Dependencies)));
-            services.AddValidators(Assembly.GetExecutingAssembly());
             
             return services;
         }

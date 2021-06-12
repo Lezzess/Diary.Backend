@@ -10,7 +10,6 @@ using AutoMapper;
 using Core.Exceptions;
 using Core.Models;
 using Core.Repositories;
-using Core.Services;
 using MediatR;
 
 namespace Application.Requests.Diaries
@@ -22,7 +21,7 @@ namespace Application.Requests.Diaries
         #region Dependencies
 
         private readonly IMapper _mapper;
-        private readonly IValidator<Diary> _validator;
+        //private readonly IValidator<Diary> _validator;
         private readonly IDiaryRepository _diaryRepository;
 
         #endregion
@@ -31,11 +30,11 @@ namespace Application.Requests.Diaries
 
         public GetDiaryRequestHandler(
             IMapper mapper,
-            IValidator<Diary> validator,
+            //IValidator<Diary> validator,
             IDiaryRepository diaryRepository)
         {
             _mapper = mapper;
-            _validator = validator;
+            //_validator = validator;
             _diaryRepository = diaryRepository;
         }
 
@@ -45,7 +44,7 @@ namespace Application.Requests.Diaries
 
         public async Task<DiaryDto> Handle(GetDiaryRequest request, CancellationToken cancellationToken)
         {
-            _validator.Validate(request.Id, d => d.Id);
+            //_validator.Validate(request.Id, d => d.Id);
 
             var diary = await _diaryRepository.GetAsync(request.Id!.Value);
             if (diary == null)

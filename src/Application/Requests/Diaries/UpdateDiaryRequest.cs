@@ -10,7 +10,6 @@ using AutoMapper;
 using Core.Exceptions;
 using Core.Models;
 using Core.Repositories;
-using Core.Services;
 using MediatR;
 
 namespace Application.Requests.Diaries
@@ -22,7 +21,7 @@ namespace Application.Requests.Diaries
         #region Dependencies
 
         private readonly IMapper _mapper;
-        private readonly IValidator<Diary> _validator;
+        //private readonly IValidator<Diary> _validator;
         private readonly IDiaryRepository _diaryRepository;
         private readonly IUnitOfWork _unitOfWork;
 
@@ -32,12 +31,12 @@ namespace Application.Requests.Diaries
 
         public UpdateDiaryRequestHandler(
             IMapper mapper,
-            IValidator<Diary> validator, 
+            //IValidator<Diary> validator, 
             IDiaryRepository diaryRepository, 
             IUnitOfWork unitOfWork)
         {
             _mapper = mapper;
-            _validator = validator;
+            //_validator = validator;
             _diaryRepository = diaryRepository;
             _unitOfWork = unitOfWork;
         }
@@ -50,9 +49,9 @@ namespace Application.Requests.Diaries
         {
             var (id, title, description) = request;
 
-            _validator.Validate(id, d => d.Id);
-            _validator.Validate(title, d => d.Title);
-            _validator.Validate(description, d => d.Description);
+            //_validator.Validate(id, d => d.Id);
+            //_validator.Validate(title, d => d.Title);
+            //_validator.Validate(description, d => d.Description);
 
             var diary = await _diaryRepository.GetAsync(id!.Value);
             if (diary == null)
