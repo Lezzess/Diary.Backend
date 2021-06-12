@@ -5,7 +5,11 @@
 using System;
 using System.Threading.Tasks;
 using Application.Dtos;
-using Application.Requests.Diaries;
+using Application.Requests.Diaries.Add;
+using Application.Requests.Diaries.Get;
+using Application.Requests.Diaries.GetAll;
+using Application.Requests.Diaries.Remove;
+using Application.Requests.Diaries.Update;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

@@ -10,10 +10,8 @@ using AutoMapper;
 using Core.Repositories;
 using MediatR;
 
-namespace Application.Requests.Diaries
+namespace Application.Requests.Diaries.GetAll
 {
-    public record GetAllDiariesRequest() : IRequest<List<DiaryDto>>;
-
     internal class GetAllDiariesRequestHandler : IRequestHandler<GetAllDiariesRequest, List<DiaryDto>>
     {
         #region Dependencies

@@ -19,8 +19,8 @@ namespace Core.Models
 
         public Diary(string title, string description)
         {
-            Title = title;
-            Description = description;
+            ChangeTitle(title);
+            ChangeDescription(description);
         }
 
         #endregion
@@ -29,12 +29,12 @@ namespace Core.Models
 
         public void ChangeTitle(string title)
         {
-            Title = title;
+            Title = title.Trim();
         }
 
         public void ChangeDescription(string description)
         {
-            Description = description;
+            Description = description.Trim();
         }
 
         #endregion

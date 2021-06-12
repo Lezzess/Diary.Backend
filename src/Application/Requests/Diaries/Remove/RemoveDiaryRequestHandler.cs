@@ -2,7 +2,6 @@
 
 // PVS-Studio Static Code Analyzer for C, C++, C#, and Java: http://www.viva64.com
 
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Core.Exceptions;
@@ -10,15 +9,12 @@ using Core.Models;
 using Core.Repositories;
 using MediatR;
 
-namespace Application.Requests.Diaries
+namespace Application.Requests.Diaries.Remove
 {
-    public record RemoveDiaryRequest(Guid? Id) : IRequest;
-
     internal class RemoveDiaryRequestHandler : IRequestHandler<RemoveDiaryRequest>
     {
         #region Dependencies
 
-        //private readonly IValidator<Diary> _validator;
         private readonly IDiaryRepository _diaryRepository;
         private readonly IUnitOfWork _unitOfWork;
 
@@ -27,11 +23,9 @@ namespace Application.Requests.Diaries
         #region Constructors
 
         public RemoveDiaryRequestHandler(
-            //IValidator<Diary> validator, 
             IDiaryRepository diaryRepository, 
             IUnitOfWork unitOfWork)
         {
-            //_validator = validator;
             _diaryRepository = diaryRepository;
             _unitOfWork = unitOfWork;
         }
@@ -42,11 +36,9 @@ namespace Application.Requests.Diaries
 
         public async Task<Unit> Handle(RemoveDiaryRequest request, CancellationToken cancellationToken)
         {
-            //_validator.Validate(request.Id, d => d.Id);
-
-            var diary = await _diaryRepository.GetAsync(request.Id!.Value);
+            var diary = await _diaryRepository.GetAsync(request.Id);
             if (diary == null)
-                throw new ModelNotFoundException<Diary>();
+                throw new EntityNotFoundException(typeof(Diary));
 
             await _diaryRepository.RemoveAsync(diary);
             await _unitOfWork.SaveChangesAsync(cancellationToken);
