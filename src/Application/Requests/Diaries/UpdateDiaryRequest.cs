@@ -2,25 +2,26 @@
 
 // PVS-Studio Static Code Analyzer for C, C++, C#, and Java: http://www.viva64.com
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Dtos;
-using Application.Extensions;
 using AutoMapper;
 using Core.Exceptions;
 using Core.Models;
 using Core.Repositories;
-using FluentValidation;
 using MediatR;
 
-namespace Application.Requests.Diaries.Update
+namespace Application.Requests.Diaries
 {
+    public record UpdateDiaryRequest(Guid? Id, string Title, string Description) : IRequest<DiaryDto>;
+
     internal class UpdateDiaryRequestHandler : IRequestHandler<UpdateDiaryRequest, DiaryDto>
     {
         #region Dependencies
 
         private readonly IMapper _mapper;
-        private readonly IValidator<Diary> _validator;
+        //private readonly IValidator<Diary> _validator;
         private readonly IDiaryRepository _diaryRepository;
         private readonly IUnitOfWork _unitOfWork;
 
@@ -30,12 +31,12 @@ namespace Application.Requests.Diaries.Update
 
         public UpdateDiaryRequestHandler(
             IMapper mapper,
-            IValidator<Diary> validator,
+            //IValidator<Diary> validator, 
             IDiaryRepository diaryRepository, 
             IUnitOfWork unitOfWork)
         {
             _mapper = mapper;
-            _validator = validator;
+            //_validator = validator;
             _diaryRepository = diaryRepository;
             _unitOfWork = unitOfWork;
         }
@@ -46,18 +47,18 @@ namespace Application.Requests.Diaries.Update
 
         public async Task<DiaryDto> Handle(UpdateDiaryRequest request, CancellationToken cancellationToken)
         {
-            var diary = await _diaryRepository.GetAsync(request.Id);
+            var (id, title, description) = request;
+
+            //_validator.Validate(id, d => d.Id);
+            //_validator.Validate(title, d => d.Title);
+            //_validator.Validate(description, d => d.Description);
+
+            var diary = await _diaryRepository.GetAsync(id!.Value);
             if (diary == null)
-                throw new EntityNotFoundException(typeof(Diary));
+                throw new ModelNotFoundException<Diary>();
 
-            diary.ChangeTitle(request.Title);
-            diary.ChangeDescription(request.Description);
-
-            await _validator.ValidateStrictAsync(
-                diary,
-                options => options.IncludeProperties(
-                    d => d.Title, d => d.Description),
-                cancellationToken);
+            diary.ChangeTitle(title);
+            diary.ChangeDescription(description);
 
             await _diaryRepository.UpdateAsync(diary);
             await _unitOfWork.SaveChangesAsync(cancellationToken);
