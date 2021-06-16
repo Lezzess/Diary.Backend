@@ -4,7 +4,7 @@
 
 using System.Linq.Expressions;
 
-namespace Utilities.Services.Validation.Rules.Collections
+namespace Common.Services.Validation.Rules.Collections
 {
     public class StringValidationRuleCollection : ValidationRuleCollection<string>
     {

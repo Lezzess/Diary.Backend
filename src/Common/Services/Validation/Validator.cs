@@ -5,13 +5,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using Common.Services.Validation.Configuration;
+using Common.Services.Validation.Pairs;
+using Common.Services.Validation.Rules.Collections;
 using Core.Exceptions.Validation;
-using Core.Services;
-using Utilities.Services.Validation.Configuration;
-using Utilities.Services.Validation.Pairs;
-using Utilities.Services.Validation.Rules.Collections;
 
-namespace Utilities.Services.Validation
+namespace Common.Services.Validation
 {
     public abstract class Validator<TClass> : IValidator<TClass>
     {

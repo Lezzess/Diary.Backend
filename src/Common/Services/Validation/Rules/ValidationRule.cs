@@ -4,7 +4,7 @@
 
 using System;
 
-namespace Utilities.Services.Validation.Rules
+namespace Common.Services.Validation.Rules
 {
     internal class ValidationRule<TValue>
     {

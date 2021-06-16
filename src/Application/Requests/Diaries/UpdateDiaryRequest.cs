@@ -7,11 +7,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using Application.Dtos;
 using AutoMapper;
+using Common.Services.Validation;
 using Core.Exceptions;
 using Core.Exceptions.Validation;
 using Core.Models;
 using Core.Repositories;
-using Core.Services;
 using MediatR;
 
 namespace Application.Requests.Diaries

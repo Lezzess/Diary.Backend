@@ -5,10 +5,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using Common.Services.Validation.Rules.Collections;
 using Core.Exceptions;
-using Utilities.Services.Validation.Rules.Collections;
 
-namespace Utilities.Services.Validation.Configuration
+namespace Common.Services.Validation.Configuration
 {
     internal class ValidationConfiguration : IValidationConfiguration
     {

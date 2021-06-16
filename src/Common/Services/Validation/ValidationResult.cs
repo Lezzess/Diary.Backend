@@ -5,7 +5,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Utilities.Services.Validation
+namespace Common.Services.Validation
 {
     public class ValidationResult
     {

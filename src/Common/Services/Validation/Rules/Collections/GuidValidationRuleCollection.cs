@@ -5,7 +5,7 @@
 using System;
 using System.Linq.Expressions;
 
-namespace Utilities.Services.Validation.Rules.Collections
+namespace Common.Services.Validation.Rules.Collections
 {
     public class GuidValidationRuleCollection : ValidationRuleCollection<Guid>
     {

@@ -4,12 +4,12 @@
 
 using System.Linq;
 using System.Reflection;
-using Core.Services;
+using Common.Services.Resources;
+using Common.Services.Validation;
+using Common.Services.Validation.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Utilities.Services.Resources;
-using Utilities.Services.Validation.Configuration;
 
-namespace Utilities.DependencyInjection
+namespace Common.DependencyInjection
 {
     public static class Dependencies
     {
@@ -18,7 +18,7 @@ namespace Utilities.DependencyInjection
         public static IServiceCollection AddCoreServicesDependencies(this IServiceCollection services)
         {
             services.AddValidation();
-            services.AddUtilities();
+            services.AddResources();
             
             return services;
         }
@@ -46,15 +46,15 @@ namespace Utilities.DependencyInjection
 
         #region Private Methods
 
-        private static IServiceCollection AddValidation(this IServiceCollection services)
+        private static IServiceCollection AddResources(this IServiceCollection services)
         {
-            services.AddSingleton<IValidationConfiguration, ValidationConfiguration>();
+            services.AddTransient<IAssemblyResourceManager, AssemblyResourceManager>();
             return services;
         }
 
-        private static IServiceCollection AddUtilities(this IServiceCollection services)
+        private static IServiceCollection AddValidation(this IServiceCollection services)
         {
-            services.AddTransient<IAssemblyResourceManager, AssemblyResourceManager>();
+            services.AddSingleton<IValidationConfiguration, ValidationConfiguration>();
             return services;
         }
 

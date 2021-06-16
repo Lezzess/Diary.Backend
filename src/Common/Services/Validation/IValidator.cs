@@ -5,7 +5,7 @@
 using System;
 using System.Linq.Expressions;
 
-namespace Core.Services
+namespace Common.Services.Validation
 {
     public interface IValidator<TClass>
     {

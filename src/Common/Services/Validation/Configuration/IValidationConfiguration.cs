@@ -4,9 +4,9 @@
 
 using System;
 using System.Linq.Expressions;
-using Utilities.Services.Validation.Rules.Collections;
+using Common.Services.Validation.Rules.Collections;
 
-namespace Utilities.Services.Validation.Configuration
+namespace Common.Services.Validation.Configuration
 {
     public interface IValidationConfiguration
     {

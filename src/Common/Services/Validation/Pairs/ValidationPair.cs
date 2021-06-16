@@ -2,9 +2,9 @@
 
 // PVS-Studio Static Code Analyzer for C, C++, C#, and Java: http://www.viva64.com
 
-using Utilities.Services.Validation.Rules.Collections;
+using Common.Services.Validation.Rules.Collections;
 
-namespace Utilities.Services.Validation.Pairs
+namespace Common.Services.Validation.Pairs
 {
     internal class ValidationPair<TProperty> : IValidationPair
     {

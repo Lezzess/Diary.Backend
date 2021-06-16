@@ -6,9 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Utilities.Services.Validation.Configuration;
+using Common.Services.Validation.Configuration;
 
-namespace Utilities.Services.Validation.Pairs
+namespace Common.Services.Validation.Pairs
 {
     internal class ValidationPairCollection
     {

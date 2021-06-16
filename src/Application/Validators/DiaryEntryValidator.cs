@@ -3,8 +3,8 @@
 // PVS-Studio Static Code Analyzer for C, C++, C#, and Java: http://www.viva64.com
 
 using Core.Models;
-using Utilities.Services.Validation;
-using Utilities.Services.Validation.Configuration;
+using Common.Services.Validation;
+using Common.Services.Validation.Configuration;
 
 namespace Application.Validators
 {

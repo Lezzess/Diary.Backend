@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace Utilities.Services.Validation.Rules.Collections
+namespace Common.Services.Validation.Rules.Collections
 {
     public abstract class ValidationRuleCollection
     {

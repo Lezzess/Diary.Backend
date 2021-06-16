@@ -5,7 +5,7 @@
 using System.Reflection;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using Utilities.DependencyInjection;
+using Common.DependencyInjection;
 
 namespace Application.DependencyInjection
 {
