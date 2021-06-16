@@ -4,17 +4,17 @@
 
 using System;
 using System.Linq.Expressions;
-using Utilities.Services.Validation.RuleCollections;
+using Utilities.Services.Validation.Rules.Collections;
 
 namespace Utilities.Services.Validation.Configuration
 {
     public interface IValidationConfiguration
     {
-        ValidationRuleList GetRuleList<TClass, TProperty>(
-            Expression<Func<TClass, TProperty>> propertySelectionExpression);
+        ValidationRuleCollection<TProperty> GetRuleCollection<TClass, TProperty>(
+            Expression<Func<TClass, TProperty>> propertyExpression);
 
-        void AddRuleList<TClass, TProperty>(
-            Expression<Func<TClass, TProperty>> propertySelectionExpression, 
-            ValidationRuleList ruleList);
+        void AddRuleCollection<TClass, TProperty>(
+            Expression<Func<TClass, TProperty>> propertyExpression, 
+            ValidationRuleCollection<TProperty> ruleCollection);
     }
 }

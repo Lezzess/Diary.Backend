@@ -54,7 +54,7 @@ namespace Persistence.Services
             var tableName = GetDatabaseInformationTableName();
             var sql = $"select isnull(object_id('{tableName}', 'U'), -1) as [database_version]";
 
-            var databaseInformation = await _applicationContext.DatabaseInformation.FromSqlRaw(sql).FirstAsync();
+            var databaseInformation = await _applicationContext.DatabaseInformation.FromSqlRaw(sql).SingleAsync();
             return databaseInformation.DatabaseVersion >= 0;
         }
 

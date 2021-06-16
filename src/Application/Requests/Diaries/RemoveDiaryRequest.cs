@@ -6,6 +6,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Core.Exceptions;
+using Core.Exceptions.Validation;
 using Core.Models;
 using Core.Repositories;
 using Core.Services;
@@ -13,7 +14,23 @@ using MediatR;
 
 namespace Application.Requests.Diaries
 {
-    public record RemoveDiaryRequest(Guid? Id) : IRequest;
+    public record RemoveDiaryRequest : IRequest
+    {
+        #region Properties
+
+        public Guid Id { get; }
+
+        #endregion
+
+        #region Constructors
+
+        public RemoveDiaryRequest(Guid? id)
+        {
+            Id = id ?? throw new ValueIsRequiredException(nameof(Id));
+        }
+
+        #endregion
+    }
 
     internal class RemoveDiaryRequestHandler : IRequestHandler<RemoveDiaryRequest>
     {
@@ -45,7 +62,7 @@ namespace Application.Requests.Diaries
         {
             _validator.Validate(request.Id, d => d.Id);
 
-            var diary = await _diaryRepository.GetAsync(request.Id!.Value);
+            var diary = await _diaryRepository.GetAsync(request.Id);
             if (diary == null)
                 throw new ModelNotFoundException<Diary>();
 

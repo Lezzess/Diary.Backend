@@ -9,14 +9,14 @@ namespace Core.Services
 {
     public interface IValidator<TClass>
     {
-        void Validate<TValue, TProperty>(
-            TValue valueToValidate, 
-            Expression<Func<TClass, TProperty>> propertySelectionExpression) 
-            where TValue : class;
+        void Validate<TProperty>(
+            TProperty valueToValidate,
+            Expression<Func<TClass, TProperty>> propertyExpression);
 
-        void Validate<TValue, TProperty>(
-            TValue? valueToValidate, 
-            Expression<Func<TClass, TProperty>> propertySelectionExpression) 
-            where TValue : struct;
+        void Validate<TProperty1, TProperty2>(
+            TProperty1 valueToValidate1,
+            Expression<Func<TClass, TProperty1>> propertyExpression1,
+            TProperty2 valueToValidate2,
+            Expression<Func<TClass, TProperty2>> propertyExpression2);
     }
 }

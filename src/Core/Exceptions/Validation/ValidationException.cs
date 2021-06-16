@@ -4,14 +4,10 @@
 
 using System;
 
-namespace Core.Exceptions
+namespace Core.Exceptions.Validation
 {
-    public class ValidationConfigurationException : Exception
+    public class ValidationException : Exception
     {
-        public ValidationConfigurationException(string message)
-            : base(message)
-        {
 
-        }
     }
 }

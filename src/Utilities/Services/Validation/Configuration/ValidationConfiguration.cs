@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using Core.Exceptions;
-using Utilities.Services.Validation.RuleCollections;
+using Utilities.Services.Validation.Rules.Collections;
 
 namespace Utilities.Services.Validation.Configuration
 {
@@ -14,44 +14,53 @@ namespace Utilities.Services.Validation.Configuration
     {
         #region Fields
 
-        private readonly Dictionary<RuleCollectionKey, ValidationRuleList> _ruleCollections = new();
+        private readonly Dictionary<RuleCollectionKey, ValidationRuleCollection> _ruleCollections;
+
+        #endregion
+
+        #region Constructors
+
+        public ValidationConfiguration()
+        {
+            _ruleCollections = new Dictionary<RuleCollectionKey, ValidationRuleCollection>();
+        }
 
         #endregion
 
         #region Public Methods
 
-        public ValidationRuleList GetRuleList<TClass, TProperty>(
-            Expression<Func<TClass, TProperty>> propertySelectionExpression)
+        public ValidationRuleCollection<TProperty> GetRuleCollection<TClass, TProperty>(
+            Expression<Func<TClass, TProperty>> propertyExpression)
         {
-            var key = CreateKey(propertySelectionExpression);
+            var key = CreateKey(propertyExpression);
 
-            if (!_ruleCollections.TryGetValue(key, out var ruleList))
+            if (!_ruleCollections.TryGetValue(key, out var ruleCollection))
             {
                 throw new ValidationConfigurationException("Validation rule list does not exist for the property " 
                                                            + $"{key.PropertyName} of type {key.ClassType}");
             }
 
-            return ruleList;
+            return (ValidationRuleCollection<TProperty>)ruleCollection;
         }
 
-        public void AddRuleList<TClass, TProperty>(
-            Expression<Func<TClass, TProperty>> propertySelectionExpression, 
-            ValidationRuleList ruleList)
+        public void AddRuleCollection<TClass, TProperty>(
+            Expression<Func<TClass, TProperty>> propertyExpression, 
+            ValidationRuleCollection<TProperty> ruleCollection)
         {
-            var key = CreateKey(propertySelectionExpression);
-            _ruleCollections.Add(key, ruleList);
+            var key = CreateKey(propertyExpression);
+            _ruleCollections.Add(key, ruleCollection);
         }
 
         #endregion
 
         #region Private Methods
 
-        private static RuleCollectionKey CreateKey<TClass, TValue>(
-            Expression<Func<TClass, TValue>> propertySelectionExpression)
+        private static RuleCollectionKey CreateKey<TClass, TProperty>(
+            Expression<Func<TClass, TProperty>> propertyExpression)
         {
             var classType = typeof(TClass);
 
-            var memberExpression = (MemberExpression)propertySelectionExpression.Body;
+            var memberExpression = (MemberExpression)propertyExpression.Body;
             var propertyName = memberExpression.Member.Name;
 
             return new RuleCollectionKey(classType, propertyName);

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Application.Dtos;
 using AutoMapper;
 using Core.Exceptions;
+using Core.Exceptions.Validation;
 using Core.Models;
 using Core.Repositories;
 using Core.Services;
@@ -15,7 +16,38 @@ using MediatR;
 
 namespace Application.Requests.Diaries
 {
-    public record UpdateDiaryRequest(Guid? Id, string Title, string Description) : IRequest<DiaryDto>;
+    public record UpdateDiaryRequest : IRequest<DiaryDto>
+    {
+        #region Properties
+
+        public Guid Id { get; }
+        public string Title { get; }
+        public string Description { get; }
+
+        #endregion
+
+        #region Constructors
+
+        public UpdateDiaryRequest(Guid? id, string title, string description)
+        {
+            Id = id ?? throw new ValueIsRequiredException(nameof(Id));
+            Title = title ?? throw new ValueIsRequiredException(nameof(Title));
+            Description = description ?? throw new ValueIsRequiredException(nameof(Description));
+        }
+
+        #endregion
+
+        #region Deconstructor
+
+        public void Deconstruct(out Guid id, out string title, out string description)
+        {
+            id = Id;
+            title = Title;
+            description = Description;
+        }
+
+        #endregion
+    }
 
     internal class UpdateDiaryRequestHandler : IRequestHandler<UpdateDiaryRequest, DiaryDto>
     {
@@ -50,11 +82,11 @@ namespace Application.Requests.Diaries
         {
             var (id, title, description) = request;
 
-            _validator.Validate(id, d => d.Id);
-            _validator.Validate(title, d => d.Title);
-            _validator.Validate(description, d => d.Description);
+            _validator.Validate(
+                title, d => d.Title,
+                description, d => d.Description);
 
-            var diary = await _diaryRepository.GetAsync(id!.Value);
+            var diary = await _diaryRepository.GetAsync(id);
             if (diary == null)
                 throw new ModelNotFoundException<Diary>();
 

@@ -5,6 +5,7 @@
 using System;
 using System.Threading.Tasks;
 using Core.Exceptions;
+using Core.Exceptions.Validation;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Hosting;

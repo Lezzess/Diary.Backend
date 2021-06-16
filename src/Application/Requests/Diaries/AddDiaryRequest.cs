@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Application.Dtos;
 using AutoMapper;
+using Core.Exceptions.Validation;
 using Core.Models;
 using Core.Repositories;
 using Core.Services;
@@ -13,7 +14,35 @@ using MediatR;
 
 namespace Application.Requests.Diaries
 {
-    public record AddDiaryRequest(string Title, string Description) : IRequest<DiaryDto>;
+    public record AddDiaryRequest : IRequest<DiaryDto>
+    {
+        #region Properties
+
+        public string Title { get; }
+        public string Description { get; }
+
+        #endregion
+
+        #region Constructors
+
+        public AddDiaryRequest(string title, string description)
+        {
+            Title = title ?? throw new ValueIsRequiredException(nameof(Title));
+            Description = description ?? throw new ValueIsRequiredException(nameof(Description));
+        }
+
+        #endregion
+
+        #region Deconstructor
+
+        public void Deconstruct(out string title, out string description)
+        {
+            title = Title;
+            description = Description;
+        }
+
+        #endregion
+    }
 
     internal class AddDiaryRequestHandler : IRequestHandler<AddDiaryRequest, DiaryDto>
     {
@@ -48,9 +77,10 @@ namespace Application.Requests.Diaries
         {
             var (title, description) = request;
 
-            _validator.Validate(title, d => d.Title);
-            _validator.Validate(description, d => d.Description);
-
+            _validator.Validate(
+                title, d => d.Title,
+                description, d => d.Description);
+            
             var diary = new Diary(title, description);
             await _diaryRepository.AddAsync(diary);
             await _unitOfWork.SaveChangesAsync(cancellationToken);

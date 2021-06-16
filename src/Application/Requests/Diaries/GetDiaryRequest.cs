@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Application.Dtos;
 using AutoMapper;
 using Core.Exceptions;
+using Core.Exceptions.Validation;
 using Core.Models;
 using Core.Repositories;
 using Core.Services;
@@ -15,7 +16,23 @@ using MediatR;
 
 namespace Application.Requests.Diaries
 {
-    public record GetDiaryRequest(Guid? Id) : IRequest<DiaryDto>;
+    public record GetDiaryRequest : IRequest<DiaryDto>
+    {
+        #region Properties
+
+        public Guid Id { get; }
+
+        #endregion
+
+        #region Constructors
+
+        public GetDiaryRequest(Guid? id)
+        {
+            Id = id ?? throw new ValueIsRequiredException(nameof(Id));
+        }
+
+        #endregion
+    }
 
     internal class GetDiaryRequestHandler : IRequestHandler<GetDiaryRequest, DiaryDto>
     {
@@ -47,7 +64,7 @@ namespace Application.Requests.Diaries
         {
             _validator.Validate(request.Id, d => d.Id);
 
-            var diary = await _diaryRepository.GetAsync(request.Id!.Value);
+            var diary = await _diaryRepository.GetAsync(request.Id);
             if (diary == null)
                 throw new ModelNotFoundException<Diary>();
 

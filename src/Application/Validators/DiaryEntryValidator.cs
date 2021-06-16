@@ -14,16 +14,14 @@ namespace Application.Validators
             : base(validationConfiguration)
         {
             Value(entry => entry.Id)
-                .IsNotNullOrEmpty();
+                .IsNotEmpty();
 
             Value(entry => entry.Title)
-                .Trim()
-                .IsNotNullOrEmpty()
+                .IsNotEmpty()
                 .HasMaxLength(300);
 
             Value(entry => entry.Description)
-                .Trim()
-                .IsNotNullOrEmpty();
+                .IsNotEmpty();
         }
     }
 }
