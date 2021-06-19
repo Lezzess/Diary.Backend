@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using Core.Exceptions.Validation;
 
 namespace Common.Services.Validation.Rules.Collections
 {
@@ -43,19 +44,16 @@ namespace Common.Services.Validation.Rules.Collections
 
         #region Public Methods
 
-        public ValidationResult Validate(TValue value)
+        public void Validate(TValue value)
         {
-            var result = new ValidationResult();
             foreach (var rule in _rules)
             {
                 if (rule.IsValid(value))
                     continue;
 
                 var errorMessage = rule.Message ?? GetDefaultErrorMessage(value);
-                result.AddError(errorMessage);
+                throw new InputIsInvalidException(errorMessage);
             }
-
-            return result;
         }
 
         #endregion

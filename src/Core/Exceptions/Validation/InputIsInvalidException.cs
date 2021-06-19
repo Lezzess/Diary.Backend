@@ -2,25 +2,14 @@
 
 // PVS-Studio Static Code Analyzer for C, C++, C#, and Java: http://www.viva64.com
 
-using System.Collections.Generic;
-
 namespace Core.Exceptions.Validation
 {
     public class InputIsInvalidException : ValidationException
     {
-        #region Properties
-
-        public IReadOnlyCollection<string> Errors { get; }
-
-        #endregion
-
-        #region Constructors
-
-        public InputIsInvalidException(IReadOnlyCollection<string> errors)
+        public InputIsInvalidException(string message)
+            : base(message)
         {
-            Errors = errors;
-        }
 
-        #endregion
+        }
     }
 }

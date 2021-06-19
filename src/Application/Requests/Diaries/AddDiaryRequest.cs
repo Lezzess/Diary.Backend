@@ -77,10 +77,9 @@ namespace Application.Requests.Diaries
         {
             var (title, description) = request;
 
-            _validator.Validate(
-                title, d => d.Title,
-                description, d => d.Description);
-            
+            _validator.Validate(title, d => d.Title);
+            _validator.Validate(description, d => d.Description);
+
             var diary = new Diary(title, description);
             await _diaryRepository.AddAsync(diary);
             await _unitOfWork.SaveChangesAsync(cancellationToken);

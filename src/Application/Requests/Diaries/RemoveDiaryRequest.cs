@@ -60,11 +60,9 @@ namespace Application.Requests.Diaries
 
         public async Task<Unit> Handle(RemoveDiaryRequest request, CancellationToken cancellationToken)
         {
-            _validator.Validate(request.Id, d => d.Id);
-
             var diary = await _diaryRepository.GetAsync(request.Id);
             if (diary == null)
-                throw new ModelNotFoundException<Diary>();
+                throw new EntityNotFoundException(typeof(Diary));
 
             await _diaryRepository.RemoveAsync(diary);
             await _unitOfWork.SaveChangesAsync(cancellationToken);

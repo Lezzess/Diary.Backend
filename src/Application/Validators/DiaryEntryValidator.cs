@@ -2,9 +2,9 @@
 
 // PVS-Studio Static Code Analyzer for C, C++, C#, and Java: http://www.viva64.com
 
-using Core.Models;
 using Common.Services.Validation;
 using Common.Services.Validation.Configuration;
+using Core.Models;
 
 namespace Application.Validators
 {
@@ -13,9 +13,6 @@ namespace Application.Validators
         public DiaryValidator(IValidationConfiguration validationConfiguration) 
             : base(validationConfiguration)
         {
-            Value(entry => entry.Id)
-                .IsNotEmpty();
-
             Value(entry => entry.Title)
                 .IsNotEmpty()
                 .HasMaxLength(300);

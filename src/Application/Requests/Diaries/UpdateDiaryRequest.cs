@@ -82,13 +82,12 @@ namespace Application.Requests.Diaries
         {
             var (id, title, description) = request;
 
-            _validator.Validate(
-                title, d => d.Title,
-                description, d => d.Description);
+            _validator.Validate(title, d => d.Title);
+            _validator.Validate(description, d => d.Description);
 
             var diary = await _diaryRepository.GetAsync(id);
             if (diary == null)
-                throw new ModelNotFoundException<Diary>();
+                throw new EntityNotFoundException(typeof(Diary));
 
             diary.ChangeTitle(title);
             diary.ChangeDescription(description);

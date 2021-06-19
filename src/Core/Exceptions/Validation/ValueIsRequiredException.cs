@@ -6,19 +6,10 @@ namespace Core.Exceptions.Validation
 {
     public class ValueIsRequiredException : ValidationException
     {
-        #region Properties
-
-        public string PropertyName { get; set; }
-
-        #endregion
-
-        #region Constructors
-
-        public ValueIsRequiredException(string propertyName)
+        public ValueIsRequiredException(string message)
+            : base(message)
         {
-            PropertyName = propertyName;
-        }
 
-        #endregion
+        }
     }
 }

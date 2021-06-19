@@ -62,11 +62,9 @@ namespace Application.Requests.Diaries
 
         public async Task<DiaryDto> Handle(GetDiaryRequest request, CancellationToken cancellationToken)
         {
-            _validator.Validate(request.Id, d => d.Id);
-
             var diary = await _diaryRepository.GetAsync(request.Id);
             if (diary == null)
-                throw new ModelNotFoundException<Diary>();
+                throw new EntityNotFoundException(typeof(Diary));
 
             return _mapper.Map<DiaryDto>(diary);
         }

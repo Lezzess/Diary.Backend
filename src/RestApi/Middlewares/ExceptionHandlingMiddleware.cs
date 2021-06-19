@@ -56,26 +56,39 @@ namespace RestApi.Middlewares
 
         private async Task HandleExceptionAsync(Exception exception, HttpContext context)
         {
-            var statusCode = exception switch
+            var (statusCode, message) = exception switch
             {
-                ValidationException => StatusCodes.Status400BadRequest,
-                ModelNotFoundException => StatusCodes.Status404NotFound,
-                _ => StatusCodes.Status500InternalServerError
+                EntityNotFoundException e => GetEntityNotFoundExceptionResponseData(e),
+                ValidationException e => GetValidationExceptionResponseData(e),
+                { } e => GetUnknownExceptionResponseData(e)
             };
 
             context.Response.StatusCode = statusCode;
 
-            if (_environment.IsDevelopment() && statusCode == StatusCodes.Status500InternalServerError)
-            {
-                var message = $"Exception type: {exception.GetType()}\n"
-                              + $"Exception message: {exception.Message}\n"
-                              + $"Exception stack trace: {exception.StackTrace}";
+            if (_environment.IsDevelopment())
                 await context.Response.WriteAsync(message);
-            }
             else
-            {
                 await context.Response.CompleteAsync();
-            }
+        }
+
+        private static (int, string) GetEntityNotFoundExceptionResponseData(EntityNotFoundException exception)
+        {
+            return (StatusCodes.Status404NotFound, exception.Message);
+        }
+
+        private static (int, string) GetValidationExceptionResponseData(ValidationException exception)
+        {
+            return (StatusCodes.Status400BadRequest, exception.Message);
+        }
+
+        private static (int, string) GetUnknownExceptionResponseData(Exception exception)
+        {
+            var statusCode = StatusCodes.Status500InternalServerError;
+            var message = $"Exception type: {exception.GetType()}\n"
+                          + $"Exception message: {exception.Message}\n"
+                          + $"Exception stack trace: {exception.StackTrace}";
+
+            return (statusCode, message);
         }
 
         #endregion
