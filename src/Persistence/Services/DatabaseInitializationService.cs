@@ -2,10 +2,7 @@
 
 // PVS-Studio Static Code Analyzer for C, C++, C#, and Java: http://www.viva64.com
 
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Reflection;
 using System.Threading.Tasks;
-using Core.Exceptions;
 using Core.Services;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Context;
@@ -58,18 +55,10 @@ namespace Persistence.Services
             return databaseInformation.DatabaseVersion >= 0;
         }
 
-        private static string GetDatabaseInformationTableName()
+        private string GetDatabaseInformationTableName()
         {
-            var databaseInformationType = typeof(DatabaseInformation);
-            var tableAttribute = databaseInformationType.GetCustomAttribute<TableAttribute>();
-
-            if (tableAttribute == null)
-            {
-                throw new ApplicationInitializationException(
-                    $"Table attribute is not specified on the {databaseInformationType} type");
-            }
-
-            return tableAttribute.Name;
+            var tableConfiguration = _applicationContext.Model.FindEntityType(typeof(DatabaseInformation));
+            return tableConfiguration.GetTableName();
         }
 
         #endregion

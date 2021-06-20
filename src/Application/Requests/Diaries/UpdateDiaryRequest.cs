@@ -92,7 +92,6 @@ namespace Application.Requests.Diaries
             diary.ChangeTitle(title);
             diary.ChangeDescription(description);
 
-            await _diaryRepository.UpdateAsync(diary);
             await _unitOfWork.SaveChangesAsync(cancellationToken);
 
             return _mapper.Map<DiaryDto>(diary);

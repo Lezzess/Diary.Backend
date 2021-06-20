@@ -2,6 +2,8 @@
 
 // PVS-Studio Static Code Analyzer for C, C++, C#, and Java: http://www.viva64.com
 
+using System.Reflection;
+using Core.Models;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Entities;
 
@@ -12,7 +14,7 @@ namespace Persistence.Context
         #region Properties
 
         public DbSet<DatabaseInformation> DatabaseInformation { get; set; }
-        public DbSet<DiaryEntity> Diaries { get; set; }
+        public DbSet<Diary> Diaries { get; set; }
 
         #endregion
 
@@ -22,6 +24,15 @@ namespace Persistence.Context
             : base(options)
         {
 
+        }
+
+        #endregion
+
+        #region Protected Methods
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
 
         #endregion

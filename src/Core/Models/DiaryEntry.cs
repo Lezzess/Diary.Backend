@@ -17,6 +17,11 @@ namespace Core.Models
 
         #region Constructors
 
+        private Diary()
+        {
+            // For EF Core
+        }
+
         public Diary(string title, string description)
         {
             Title = title;

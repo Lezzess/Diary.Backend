@@ -5,7 +5,6 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Common.Services.Validation;
 using Core.Exceptions;
 using Core.Exceptions.Validation;
 using Core.Models;
@@ -36,7 +35,6 @@ namespace Application.Requests.Diaries
     {
         #region Dependencies
 
-        private readonly IValidator<Diary> _validator;
         private readonly IDiaryRepository _diaryRepository;
         private readonly IUnitOfWork _unitOfWork;
 
@@ -45,11 +43,9 @@ namespace Application.Requests.Diaries
         #region Constructors
 
         public RemoveDiaryRequestHandler(
-            IValidator<Diary> validator, 
             IDiaryRepository diaryRepository, 
             IUnitOfWork unitOfWork)
         {
-            _validator = validator;
             _diaryRepository = diaryRepository;
             _unitOfWork = unitOfWork;
         }
@@ -64,7 +60,7 @@ namespace Application.Requests.Diaries
             if (diary == null)
                 throw new EntityNotFoundException(typeof(Diary));
 
-            await _diaryRepository.RemoveAsync(diary);
+            _diaryRepository.Remove(diary);
             await _unitOfWork.SaveChangesAsync(cancellationToken);
             
             return Unit.Value;

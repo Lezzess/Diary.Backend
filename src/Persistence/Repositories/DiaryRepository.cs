@@ -5,12 +5,10 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using AutoMapper;
 using Core.Models;
 using Core.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Context;
-using Persistence.Entities;
 
 namespace Persistence.Repositories
 {
@@ -19,18 +17,14 @@ namespace Persistence.Repositories
         #region Dependencies
 
         private readonly ApplicationContext _applicationContext;
-        private readonly IMapper _mapper;
 
         #endregion
 
         #region Constructors
 
-        public DiaryRepository(
-            ApplicationContext applicationContext,
-            IMapper mapper)
+        public DiaryRepository(ApplicationContext applicationContext)
         {
             _applicationContext = applicationContext;
-            _mapper = mapper;
         }
 
         #endregion
@@ -39,34 +33,22 @@ namespace Persistence.Repositories
 
         public async Task<List<Diary>> GetAllAsync()
         {
-            var diaryEntities = await _applicationContext.Diaries.AsNoTracking().ToListAsync();
-            return _mapper.Map<List<Diary>>(diaryEntities);
+            return await _applicationContext.Diaries.AsNoTracking().ToListAsync();
         }
 
         public async Task<Diary> GetAsync(Guid id)
         {
-            var diaryEntity = await _applicationContext.Diaries.FindAsync(id);
-            return _mapper.Map<Diary>(diaryEntity);
+            return await _applicationContext.Diaries.FindAsync(id);
         }
 
         public async Task AddAsync(Diary diary)
         {
-            var diaryEntity = _mapper.Map<DiaryEntity>(diary);
-            await _applicationContext.Diaries.AddAsync(diaryEntity);
-            diary.Id = diaryEntity.Id;
+            await _applicationContext.Diaries.AddAsync(diary);
         }
 
-        public async Task UpdateAsync(Diary diary)
+        public void Remove(Diary diary)
         {
-            var diaryEntity = await _applicationContext.Diaries.FindAsync(diary.Id);
-            diaryEntity.Title = diary.Title;
-            diaryEntity.Description = diary.Description;
-        }
-        
-        public async Task RemoveAsync(Diary diary)
-        {
-            var diaryEntity = await _applicationContext.Diaries.FindAsync(diary.Id);
-            _applicationContext.Diaries.Remove(diaryEntity);
+            _applicationContext.Diaries.Remove(diary);
         }
 
         #endregion

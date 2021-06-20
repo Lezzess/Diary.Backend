@@ -7,7 +7,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Application.Dtos;
 using AutoMapper;
-using Common.Services.Validation;
 using Core.Exceptions;
 using Core.Exceptions.Validation;
 using Core.Models;
@@ -39,7 +38,6 @@ namespace Application.Requests.Diaries
         #region Dependencies
 
         private readonly IMapper _mapper;
-        private readonly IValidator<Diary> _validator;
         private readonly IDiaryRepository _diaryRepository;
 
         #endregion
@@ -48,11 +46,9 @@ namespace Application.Requests.Diaries
 
         public GetDiaryRequestHandler(
             IMapper mapper,
-            IValidator<Diary> validator,
             IDiaryRepository diaryRepository)
         {
             _mapper = mapper;
-            _validator = validator;
             _diaryRepository = diaryRepository;
         }
 

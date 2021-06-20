@@ -14,7 +14,6 @@ namespace Core.Repositories
         Task<List<Diary>> GetAllAsync();
         Task<Diary> GetAsync(Guid id);
         Task AddAsync(Diary diary);
-        Task UpdateAsync(Diary diary);
-        Task RemoveAsync(Diary diary);
+        void Remove(Diary diary);
     }
 }
